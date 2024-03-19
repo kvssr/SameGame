@@ -10,6 +10,7 @@ import {
 const GameView = () => {
   const [board, setBoard] = useState(generateBoard());
   const [hoverShape, setHoverShape] = useState([]);
+  const [score, setScore] = useState(0);
 
   const handleOnClick = (e) => {
     let id = e.target.id.split("-");
@@ -18,6 +19,7 @@ const GameView = () => {
     console.log(`onClick`, board[y][x]);
     if (board[y][x].isEmpty) return;
     if (hoverShape.length > 2) {
+      setScore(score + Math.pow(hoverShape.length - 2, 2));
       setBoard([...removeShape(board, hoverShape)]);
     }
   };
@@ -38,12 +40,28 @@ const GameView = () => {
     });
   };
 
+  const handleNewGameClick = (e) => {
+    setBoard(generateBoard());
+    setScore(0);
+  };
+
   const handleOnMouseLeave = (e) => {
     toggleHightlight(hoverShape);
   };
 
   return (
     <div className="container">
+      <div className="score-board">
+        <button
+          className="newGameBtn"
+          onClick={handleNewGameClick}
+        >
+          <p>+</p>
+        </button>
+        <div className="scoreDiv">
+          <p>{score}</p>
+        </div>
+      </div>
       <div className="board">
         {board.map((row, i) => {
           return (

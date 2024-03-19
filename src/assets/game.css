@@ -1,3 +1,11 @@
+button {
+    all: unset;
+}
+
+input {
+    all: unset;
+}
+
 .newGameBtn>p {
     font-size: 28px;
 }

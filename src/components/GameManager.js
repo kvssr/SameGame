@@ -13,7 +13,7 @@ export const generateBoard = (x = 20, y = 20) => {
 
 export const clickBoardCell = (board, x, y) => {};
 
-export const getHoverShape = (board, x, y, cellList) => {
+export const getShape = (board, x, y, cellList) => {
   const checkTop = Math.max(0, y - 1);
   const checkRight = Math.min(board[0].length - 1, x + 1);
   const checkBottom = Math.min(board.length - 1, y + 1);
@@ -23,13 +23,13 @@ export const getHoverShape = (board, x, y, cellList) => {
   board[y][x].visited = true;
   cellList.push(board[y][x]);
   if (!board[checkTop][x].visited && board[checkTop][x].colour === colour)
-    getHoverShape(board, x, checkTop, cellList);
+    getShape(board, x, checkTop, cellList);
   if (!board[y][checkRight].visited && board[y][checkRight].colour === colour)
-    getHoverShape(board, checkRight, y, cellList);
+    getShape(board, checkRight, y, cellList);
   if (!board[checkBottom][x].visited && board[checkBottom][x].colour === colour)
-    getHoverShape(board, x, checkBottom, cellList);
+    getShape(board, x, checkBottom, cellList);
   if (!board[y][checkLeft].visited && board[y][checkLeft].colour === colour)
-    getHoverShape(board, checkLeft, y, cellList);
+    getShape(board, checkLeft, y, cellList);
 
   return cellList;
 };

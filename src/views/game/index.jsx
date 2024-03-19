@@ -3,7 +3,7 @@ import Cell from "../../components/Cell";
 import "../../assets/game.css";
 import {
   generateBoard,
-  getHoverShape,
+  getShape,
   removeShape,
 } from "../../components/GameManager";
 
@@ -18,9 +18,10 @@ const GameView = () => {
     let x = Number(id[1]);
     console.log(`onClick`, board[y][x]);
     if (board[y][x].isEmpty) return;
-    if (hoverShape.length > 2) {
-      setScore(score + Math.pow(hoverShape.length - 2, 2));
-      setBoard([...removeShape(board, hoverShape)]);
+    let shape = getShape(board, x, y, []);
+    if (shape.length > 2) {
+      setBoard([...removeShape(board, shape)]);
+      setScore(score + Math.pow(shape.length - 2, 2));
     }
   };
 
@@ -28,7 +29,7 @@ const GameView = () => {
     let id = e.target.id.split("-");
     let y = Number(id[0]);
     let x = Number(id[1]);
-    let cellList = getHoverShape(board, x, y, []);
+    let cellList = getShape(board, x, y, []);
     setHoverShape(cellList);
     toggleHightlight(cellList);
   };

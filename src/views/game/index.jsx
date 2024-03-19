@@ -13,9 +13,13 @@ const GameView = () => {
 
   const handleOnClick = (e) => {
     let id = e.target.id.split("-");
-    let x = Number(id[0]);
-    let y = Number(id[1]);
-    if (hoverShape.length > 2) removeShape(board, hoverShape);
+    let y = Number(id[0]);
+    let x = Number(id[1]);
+    console.log(`onClick`, board[y][x]);
+    if (board[y][x].isEmpty) return;
+    if (hoverShape.length > 2) {
+      setBoard([...removeShape(board, hoverShape)]);
+    }
   };
 
   const handleOnMouseOver = (e) => {
@@ -26,19 +30,6 @@ const GameView = () => {
     setHoverShape(cellList);
     toggleHightlight(cellList);
   };
-
-  //   useEffect(() => {
-  //     hoverShape.forEach((cell) => {
-  //       cell.highlight = true;
-  //     });
-  //     setBoard([...board]);
-  //     return () => {
-  //       hoverShape.forEach((cell) => {
-  //         cell.highlight = false;
-  //         cell.visited = false;
-  //       });
-  //     };
-  //   }, [hoverShape]);
 
   const toggleHightlight = (shape) => {
     shape.forEach((cell) => {

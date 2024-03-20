@@ -65,16 +65,29 @@ input {
     filter: brightness(200%);
 }
 
-@media screen {
+.container {
+    width: fit-content;
+}
+
+@media only screen and (max-width: 768px) {
     .score-board {
         display: flex;
         justify-content: space-evenly;
         justify-content: space-between;
         align-items: center;
-        max-width: 100vw;
     }
-}
 
-.container {
-    width: fit-content;
+    .board-cell {
+        width: -moz-available;
+        aspect-ratio: 1/1;
+        height: auto;
+    }
+
+    .board {
+        width: 100%;
+    }
+
+    .container {
+        width: 90%;
+    }
 }

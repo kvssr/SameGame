@@ -20,6 +20,7 @@ input {
     align-items: center;
     background-color: #e9ddce;
     margin-top: 20px;
+    position: relative;
 }
 
 .board-row {
@@ -66,6 +67,45 @@ input {
 }
 
 .container {
+    width: fit-content;
+}
+
+
+/* Username screen */
+
+.username-container {
+    width: 100%;
+    height: 100%;
+    background: #323232b2;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    display: flex;
+    align-items: center;
+}
+
+.usernameForm {
+    margin: auto;
+    border-radius: 5%;
+    box-shadow: black 5px 5px;
+}
+
+.usernameForm>button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    background-color: #629086;
+}
+
+.usernameForm>button:hover {
+    background-color: #314251;
+}
+
+.usernameInput {
+    display: flex;
+    background-color: #e9ddce;
+    padding: 10px;
+    border-radius: 5% 5% 0% 0%;
     width: fit-content;
 }
 

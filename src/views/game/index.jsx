@@ -6,11 +6,13 @@ import {
   getShape,
   removeShape,
 } from "../../components/GameManager";
+import UsernameInput from "../../components/UsernameInput";
 
 const GameView = () => {
   const [board, setBoard] = useState(generateBoard());
   const [hoverShape, setHoverShape] = useState([]);
   const [score, setScore] = useState(0);
+  const [username, setUsername] = useState();
 
   const handleOnClick = (e) => {
     let id = e.target.id.split("-");
@@ -50,6 +52,12 @@ const GameView = () => {
     toggleHightlight(hoverShape);
   };
 
+  const handleSetUsername = (username) => {
+    console.log("setUsername", username);
+    if (username === undefined) return;
+    setUsername(username);
+  };
+
   return (
     <div className="container">
       <div className="score-board">
@@ -59,6 +67,9 @@ const GameView = () => {
         >
           <p>+</p>
         </button>
+        <div className="usernameDiv">
+          <p>{username}</p>
+        </div>
         <div className="scoreDiv">
           <p>{score}</p>
         </div>
@@ -83,6 +94,7 @@ const GameView = () => {
             </div>
           );
         })}
+        {!username && <UsernameInput setUsername={handleSetUsername} />}
       </div>
     </div>
   );

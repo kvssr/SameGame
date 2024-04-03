@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Cell from "../../components/Cell";
 import "../../assets/game.css";
 import {
+  checkAnyMoveAvailable,
   generateBoard,
   getShape,
   removeShape,
+  resetVisited,
 } from "../../components/GameManager";
 import UsernameInput from "../../components/UsernameInput";
 
@@ -13,6 +15,7 @@ const GameView = () => {
   const [hoverShape, setHoverShape] = useState([]);
   const [score, setScore] = useState(0);
   const [username, setUsername] = useState();
+  const [canMove, setCanMove] = useState(true);
 
   const handleOnClick = (e) => {
     let id = e.target.id.split("-");
@@ -22,8 +25,12 @@ const GameView = () => {
     if (board[y][x].isEmpty) return;
     let shape = getShape(board, x, y, []);
     if (shape.length > 2) {
-      setBoard([...removeShape(board, shape)]);
+      let newBoard = removeShape(board, shape);
+      console.log("🚀 ~ handleOnClick ~ newBoard:", newBoard);
       setScore(score + Math.pow(shape.length - 2, 2));
+      setCanMove(checkAnyMoveAvailable(board));
+      newBoard = resetVisited(newBoard);
+      setBoard([...newBoard]);
     }
   };
 
@@ -46,6 +53,7 @@ const GameView = () => {
   const handleNewGameClick = (e) => {
     setBoard(generateBoard());
     setScore(0);
+    setCanMove(true);
   };
 
   const handleOnMouseLeave = (e) => {
@@ -69,6 +77,7 @@ const GameView = () => {
         </button>
         <div className="usernameDiv">
           <p>{username}</p>
+          <p>{canMove.toString()}</p>
         </div>
         <div className="scoreDiv">
           <p>{score}</p>
@@ -94,7 +103,7 @@ const GameView = () => {
             </div>
           );
         })}
-        {!username && <UsernameInput setUsername={handleSetUsername} />}
+        {canMove && <UsernameInput setUsername={handleSetUsername} />}
       </div>
     </div>
   );

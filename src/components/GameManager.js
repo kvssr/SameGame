@@ -11,7 +11,26 @@ export const generateBoard = (x = 20, y = 20) => {
   return board;
 };
 
-export const clickBoardCell = (board, x, y) => {};
+export const checkAnyMoveAvailable = (board) => {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j].isEmpty) continue;
+      let shape = getShape(board, j, i, []);
+      if (shape.length > 2) return true;
+    }
+  }
+  return false;
+};
+
+export const resetVisited = (board) => {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j].isEmpty) continue;
+      board[i][j].visited = false;
+    }
+  }
+  return board;
+};
 
 export const getShape = (board, x, y, cellList) => {
   const checkTop = Math.max(0, y - 1);

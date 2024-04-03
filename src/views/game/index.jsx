@@ -50,10 +50,14 @@ const GameView = () => {
     });
   };
 
-  const handleNewGameClick = (e) => {
+  const generateNewGame = () => {
     setBoard(generateBoard());
     setScore(0);
     setCanMove(true);
+  };
+
+  const handleNewGameClick = (e) => {
+    generateNewGame();
   };
 
   const handleOnMouseLeave = (e) => {
@@ -64,6 +68,7 @@ const GameView = () => {
     console.log("setUsername", username);
     if (username === undefined) return;
     setUsername(username);
+    generateNewGame();
   };
 
   return (
@@ -75,10 +80,6 @@ const GameView = () => {
         >
           <p>+</p>
         </button>
-        <div className="usernameDiv">
-          <p>{username}</p>
-          <p>{canMove.toString()}</p>
-        </div>
         <div className="scoreDiv">
           <p>{score}</p>
         </div>
@@ -103,7 +104,7 @@ const GameView = () => {
             </div>
           );
         })}
-        {canMove && <UsernameInput setUsername={handleSetUsername} />}
+        {!canMove && <UsernameInput setUsername={handleSetUsername} />}
       </div>
     </div>
   );

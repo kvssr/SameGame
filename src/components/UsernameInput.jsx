@@ -1,11 +1,10 @@
 import { useRef } from "react";
 
-const UsernameInput = ({ setUsername }) => {
+const UsernameInput = ({ submitScore }) => {
   let username = useRef();
 
   const handleOnClick = () => {
-    console.log("onClick");
-    setUsername(username.current);
+    submitScore(username.current);
   };
 
   return (

@@ -112,6 +112,24 @@ input {
     width: fit-content;
 }
 
+.highscore-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul {
+    text-decoration: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 768px) {
     .score-board {
         display: flex;
